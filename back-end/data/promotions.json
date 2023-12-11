@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "hidden": false,
+    "title": "Nouvelle Promotion",
+    "commerceName": "Nom du Commerce",
+    "creationDate": "2023-01-01",
+    "content": "Description de la promotion",
+    "image": "url_de_l_image"
+  },
+  {
+    "id": 2,
+    "hidden": true,
+    "title": "Nouvelle Promotion",
+    "commerceName": "Nom du Commerce",
+    "creationDate": "2023-01-01",
+    "content": "Description de la promotion",
+    "image": "url_de_l_image"
+  },
+  {
+    "id": 3,
+    "hidden": true,
+    "title": "MODIIIF",
+    "commerceName": "Nom du Commerce",
+    "creationDate": "2023-01-01",
+    "content": "Nouv Descon",
+    "image": "url_de_l_image"
+  }
+]
