@@ -6,8 +6,8 @@
           <h2 class="card-title">{{ promotion.title }}</h2>
           <p class="card-text">{{ promotion.commerceName }}</p>
           <p class="card-text">{{ promotion.creationDate }}</p>
-          <router-link :to="{ name: 'PromotionForm', params: { id: promotion.id } }" class="btn btn-primary">Modifier</router-link>
-          <button @click="confirmDelete(promotion.id)" class="btn btn-danger" style="margin-left: 10px;">Supprimer</button>
+          <router-link :to="{ name: 'PromotionForm', params: { id: promotion.id } }" class="btn btn-primary" v-if="authState.isLoggedIn">Modifier</router-link>
+          <button @click="confirmDelete(promotion.id)" class="btn btn-danger" style="margin-left: 10px;" v-if="authState.isLoggedIn">Supprimer</button>
         </div>
       </div>
     </div>
@@ -15,6 +15,7 @@
   
   <script>
   import axios from 'axios';
+  import { inject } from 'vue';
   
   export default {
     data() {
@@ -52,6 +53,10 @@
     mounted() {
       this.fetchPromotions();
     },
+    setup() {
+    const authState = inject('authState');
+    return { authState };
+    }
   };
   </script>  
   

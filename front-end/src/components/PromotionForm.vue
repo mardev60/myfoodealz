@@ -49,6 +49,7 @@ export default {
         .then(
           response => {
             console.log(response);
+            this.$router.push('/feed');
           }
         )
         .catch(
@@ -61,6 +62,7 @@ export default {
         .then(
           response => {
             console.log(response);
+            this.$router.push('/feed');
           }
         )
         .catch(

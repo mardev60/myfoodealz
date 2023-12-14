@@ -7,3 +7,9 @@ export interface Promotion {
     image?: string;
     hidden : boolean;
 }
+
+export interface User {
+    id: number;
+    username : string;
+    password : string;
+}

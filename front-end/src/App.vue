@@ -6,14 +6,29 @@
           <img src="./assets/logo.png" id="logo"/>
         </router-link>
         <div class="flex-grow-1"></div>
-        <router-link to="/create" class="btn btn-success btn-orange ml-auto">Ajouter Promotion</router-link>
+        <router-link to="/create" class="btn btn-success btn-orange ml-auto" v-if="this.isUserLoggedIn">Ajouter Promotion</router-link>
       </div>
     </nav>
 
     <router-view />
   </div>
 </template>
+<script>
+import { inject, watch, ref} from 'vue';
 
+export default {
+  setup() {
+    const authState = inject('authState');
+    const isUserLoggedIn = ref(authState.isLoggedIn);
+
+    watch(() => authState.isLoggedIn, (newValue) => {
+      isUserLoggedIn.value = newValue;
+    });
+
+    return { isUserLoggedIn };
+  }
+};
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
