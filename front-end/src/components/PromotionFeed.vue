@@ -1,11 +1,11 @@
 <template>
     <div class="promotion-feed">
       <div v-for="promotion in promotions" :key="promotion.id" class="card my-4">
-        <img v-if="promotion.image" :src="promotion.image" alt="Promotion Image" class="card-img-top" />
+        <img v-if="promotion.image" :src="promotion.image" alt="Promotion Image" class="card-img-top" @error="handleImageError" />
         <div class="card-body">
           <h2 class="card-title">{{ promotion.title }}</h2>
           <p class="card-text">{{ promotion.commerceName }}</p>
-          <p class="card-text">{{ promotion.creationDate }}</p>
+          <p class="card-text">{{ promotion.content }}</p>
           <router-link :to="{ name: 'PromotionForm', params: { id: promotion.id } }" class="btn btn-primary" v-if="authState.isLoggedIn">Modifier</router-link>
           <button @click="confirmDelete(promotion.id)" class="btn btn-danger" style="margin-left: 10px;" v-if="authState.isLoggedIn">Supprimer</button>
         </div>
@@ -21,6 +21,7 @@
     data() {
       return {
         promotions: [],
+        defaultImage: 'https://i.ibb.co/fXHC3QF/Image-non-trouv-e.png',
       };
     },
     methods: {
@@ -48,6 +49,9 @@
           .catch(error => {
             console.error('Erreur lors de la récupération des promotions :', error);
           });
+      },
+      handleImageError(event) {
+      event.target.src = this.defaultImage;
       },
     },
     mounted() {

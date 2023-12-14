@@ -39,11 +39,11 @@ export default {
 }
 
 #logo{
-  width : 30%;
+  width : 35%;
 }
 
 .navbar {
-  background-color: #ffefdd !important;
+  background-color: #fff3e4 !important;
   color: #ffffff !important;
 }
 
