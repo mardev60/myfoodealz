@@ -1,6 +1,6 @@
 # My Foo'Dealz
 
-![Logo MyFoo'Dealz](src/assets/logo.png)
+![Logo MyFoo'Dealz](front-end/src/assets/logo.png)
 
 Application dédiée aux offres spéciales, aux promotions du jour et aux réductions. Les utilisateurs peuvent consulter les offres en cours et des nouvelles promotions sur un feed.
 
@@ -15,13 +15,13 @@ Application dédiée aux offres spéciales, aux promotions du jour et aux réduc
 
 ## Aperçu
 Login page : 
-![Logo MyFoo'Dealz](../screenshots/login.png)
+![Logo MyFoo'Dealz](screenshots/login.png)
 
 Feed avec les promotions :
-![Logo MyFoo'Dealz](../screenshots/feed.png)
+![Logo MyFoo'Dealz](screenshots/feed.png)
 
 Ajouter une promotion : 
-![Logo MyFoo'Dealz](../screenshots/form.png)
+![Logo MyFoo'Dealz](screenshots/form.png)
 
 ## Fonctionnalités
 Possibilité de consulter uniquement les promotions sans ajouter ni modifier.
