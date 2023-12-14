@@ -7,10 +7,9 @@
           <p class="card-text">{{ promotion.commerceName }}</p>
           <p class="card-text">{{ promotion.creationDate }}</p>
           <router-link :to="{ name: 'PromotionForm', params: { id: promotion.id } }" class="btn btn-primary">Modifier</router-link>
-          <button @click="deletePromotion(promotion.id)" class="btn btn-danger" style="margin-left: 10px;">Supprimer</button>
+          <button @click="confirmDelete(promotion.id)" class="btn btn-danger" style="margin-left: 10px;">Supprimer</button>
         </div>
       </div>
-      <router-link to="/create" class="btn btn-success">Créer une promotion</router-link>
     </div>
   </template>
   
@@ -25,22 +24,36 @@
     },
     methods: {
       deletePromotion(id) {
-        console.log('Suppression de la promotion avec l\'ID :', id);
+        axios.delete(`http://localhost:3000/api/promotions/${id}`)
+          .then(response => {
+            console.log('Promotion supprimée avec succès :', response.data);
+            this.fetchPromotions();
+          })
+          .catch(error => {
+            console.error('Erreur lors de la suppression de la promotion :', error);
+          });
+      },
+      confirmDelete(id) {
+        const confirmDelete = window.confirm('Voulez-vous vraiment supprimer cette promotion ?');
+        if (confirmDelete) {
+          this.deletePromotion(id);
+        }
+      },
+      fetchPromotions() {
+        axios.get('http://localhost:3000/api/promotions')
+          .then(response => {
+            this.promotions = response.data.promotions;
+          })
+          .catch(error => {
+            console.error('Erreur lors de la récupération des promotions :', error);
+          });
       },
     },
     mounted() {
-        axios.get('http://localhost:3000/api/promotions')
-        .then(response => {
-            console.log('Réponse de l\'API :', response.data.promotions);
-            this.promotions = response.data.promotions;
-        })
-        .catch(error => {
-            console.error('Erreur lors de la récupération des promotions :', error);
-        });
+      this.fetchPromotions();
     },
-
   };
-  </script>
+  </script>  
   
   <style scoped>
   .promotion-feed {
@@ -106,6 +119,4 @@
     background-color: #28a745;
     border-color: #28a745;
   }
-
-
   </style>  

@@ -4,6 +4,7 @@ import {
   createPromotionService,
   updatePromotionService,
   deletePromotionService,
+  getPromotionByIdService,
 } from '../services/promotionService';
 import { Promotion } from '../types';
 
@@ -16,14 +17,25 @@ export const getAllPromotions = (req: Request, res: Response) => {
   }
 };
 
+export function getPromotionById(req: Request, res: Response): void {
+  try {
+    const promotionId: number = parseInt(req.params.id, 10);
+    const promotion = getPromotionByIdService(promotionId);
+
+    if (!promotion) {
+      res.status(404).json({ message: 'Promotion not found' });
+    } else {
+      res.status(200).json(promotion);
+    }
+  } catch (error) {
+    console.error('Error in getPromotionById controller', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+}
+
 export const createPromotion = (req: Request, res: Response) => {
   try {
-    const { title, commerceName, creationDate, content, image }: Promotion = req.body;
-    const newPromotion: Promotion = {
-      title, commerceName, creationDate : new Date(), content, image, id: 0, hidden: false
-    };
-
-    const createdPromotion = createPromotionService(newPromotion);
+    const createdPromotion = createPromotionService(req.body);
 
     if (createdPromotion) {
       res.status(201).json({ promotion: createdPromotion });

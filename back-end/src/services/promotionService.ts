@@ -23,18 +23,33 @@ function writePromotionsToFile(promotions: Promotion[]): void {
 }
 
 export function getAllPromotionsService(): Promotion[] {
-  return readPromotionsFromFile();
+  const promotions: Promotion[] = readPromotionsFromFile();
+  return promotions.filter(promotion => !promotion.hidden);
 }
 
-export function createPromotionService(newPromotion: Omit<Promotion, 'id' | 'hidden'>): Promotion | null {
+export function getPromotionByIdService(id: number): Promotion | null {
   try {
     const promotions: Promotion[] = readPromotionsFromFile();
+    const promotion = promotions.find((promo) => promo.id === id && !promo.hidden);
+    return promotion || null;
+  } catch (error) {
+    console.error('Error getting promotion by ID', error);
+    return null;
+  }
+}
 
+export function createPromotionService(newPromotion: Omit<Promotion, 'id' | 'hidden' | 'creationDate'>): Promotion | null {
+  try {
+    const promotions: Promotion[] = readPromotionsFromFile();
+    const newId : number = promotions.length + 1;
+    
     const defaultPromotion: Promotion = {
-      id: promotions.length + 1,
+      id: newId,
       hidden: false,
+      creationDate : new Date(),
       ...newPromotion,
     };
+    console.log(defaultPromotion);
 
     promotions.push(defaultPromotion);
     writePromotionsToFile(promotions);

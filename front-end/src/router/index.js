@@ -13,6 +13,11 @@ const routes = [
     name: 'PromotionForm',
     component: PromotionForm,
   },
+  {
+    path: '/create/:id?',
+    name: 'PromotionForm',
+    component: PromotionForm,
+  },
 ];
 
 const router = createRouter({
